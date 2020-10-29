@@ -1,0 +1,20 @@
+Controllers skal stå for tjekke det hele igennem
+Modells --> Skal stå for alle funktionerne
+
+
+Laver admin user
+User --> Get all users --> Kommer ind i controlleren
+Controlleren går igennem arrayet
+Finder ID i array --> korrensponderer med useres jeg har
+Finder useren --> Opdaterer useren i arrayet --> sender array tilbage i model, som gemmer array i en fil
+
+
+
+
+1. Lav API lav alle Posts til at virke i postman (GET, PUT, POST, DELETE) til at starte med
+2. Lav Funktionerne 
+3. Lav Designet 
+
+
+Til Database:
+Lave mappe der hedder client, og lav index & html derovre.
