@@ -1,0 +1,124 @@
+
+
+
+body {
+
+    margin: 0px;
+    background-color: #4967AA;
+    display: flex; /*  */
+    align-items: center; /*  Her 'Aligner' vi items, så de er centeret -->*/
+    justify-content: center;  /* Får alt i body, til at være centreret*/
+    min-height: 100vh;  /* Gør at vi kan se 100% at siden, selvom at vores 'viewport er relativ lille*/
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.container {
+
+   background-color: #ECECE9;
+   border-radius: 5px;
+   margin-left: 100px;
+   max-width: 100%;
+   width: 400px;
+   overflow: hidden; /* Vi gør, sådan at vores box, får den border-radius på 5px, som vi har sat. Der var noget som "overflowet" den, før */
+}
+
+
+.header {
+
+background-color: #3F5992;
+padding: 20px 40px; /* Her skaber vi noget mere afstand, til vores headers "kasse" */
+color: white;
+text-align: center;
+
+}
+
+.header2 {
+    margin: 0;
+}
+
+
+.form {
+
+    padding: 30px 40px; /*  vi laver lidt padding, så der kommer større afstand, fra toppen og bunden af "formen". */
+}
+
+
+
+.form-control {
+
+margin-bottom: 10px; /* vi skaber afstand, mellem "adganskode, Email og CPR nummer" */
+padding-bottom: 30px; /* vi laver noget padding, så der er plads til vores error beskeder*/
+position: relative; /* Vi laver positonen relativ, fordi vi skal have positioner inde i elementet, som skal være absolutte */
+}
+
+.form-control label { /*Her tager vi "child", af form-control klassen*/
+display: inline-block;
+margin-bottom: 5px;
+
+}
+
+
+.form-control input { /* her tager vi child, af from-control klassen*/
+
+    border: 2px solid #f0f0f0; /*vi ændrer på border, og skifter farven*/
+    border-radius: 4px;
+    display: block; /* Vi får vores små kasser, til at stå på forskellige linjer */
+    width: 100%; /* Vi gør vores input boxe responsive*/
+    padding: 10px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+.form-control.sucess input { /* Vi opretter en klasse, til hvis vores inputs er korrekte*/
+border-color: #2ecc71; /* Vi laver farven grøn, til når adgangskoden er korrekt*/
+
+
+}
+
+
+.form-control.error input { /* Vi opretter en klasse, til hvis vores inputs er korrekte*/
+    border-color: #e74c3c; /* Vi laver farven rød, til når det ikke er korrekt*/
+
+    
+    
+    }
+
+.form-control small { /*Vi taster vores klasse ind, som skal indeholde vores error besked*/
+visibility: hidden; /*Når der ikke er en error, skal boksen "error", ikke være snylig*/
+position: absolute;
+bottom: 0;
+left: 0;
+
+}
+
+
+.form-control.error small { /*Vi opretter denne klasse, til når der kommer en error. Så bliver beskeden syndlig */
+visibility: visible; /*Når der opstår en error, skal vi se erroren, derfor visible.*/
+color: #e74c3c;
+    
+}
+
+
+.form-control small {
+
+    position: absolute; /*Vi gør vores error beskeder, absolutte*/
+    bottom: 0px;
+    left: 0px;
+    visibility: hidden; /*Vi gør vores Error tekst, usynlig*/
+}
+
+
+.form button { 
+
+    width: 100%;
+    display: block;
+    background-color: #4967AA;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-size: 16px;
+}
