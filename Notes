@@ -2,7 +2,6 @@ Controllers skal stå for tjekke det hele igennem
 Modells --> Skal stå for alle funktionerne
 
 
-Laver admin user
 User --> Get all users --> Kommer ind i controlleren
 Controlleren går igennem arrayet
 Finder ID i array --> korrensponderer med useres jeg har

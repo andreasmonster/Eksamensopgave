@@ -21,3 +21,5 @@ router.put("/", (req, res) => {
 // Opretter en bruger
 router.post("/", (req, res) => {
 });
+
+exports.userView
