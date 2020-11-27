@@ -13,11 +13,11 @@ class Match{
 }
 
 
-// laver en Const Interesecton, som går ind og matcher PaymentUser1 interesse og myFreeUser1 Interesse
+// laver en Const Interesecton, som går ind og matcher to personer
 const intersection = userModels.allUsers;
 
-// Hvis de har samme interesse, giver matchID en Match besked
-if(intersection !==0){
+// Hvis de har samme alder, giver matchID en Match besked
+if(intersection !==0){ //NOTE, skal lave alder!
     var matchID = "Match"
 // Hvis matchID ikke har en interesse som matcher, giver den "No Match"
 } else {
