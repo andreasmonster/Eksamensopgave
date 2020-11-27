@@ -8,8 +8,17 @@ const matchView = require("../models/matchModels");
 
 // Får informationer for matchet
 router.get("/", (req, res) => {
+
+    res.json(matchView.myMatch)
 });
 
 // Sletter matchet
 router.delete("/", (req, res) =>{
+
+    matchView.myMatch = [];
+    res.json({"message": "Deleted Match"})
+
 });
+
+
+exports = matchView;

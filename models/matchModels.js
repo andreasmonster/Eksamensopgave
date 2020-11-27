@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
+
 // Match klasse
 class Match{
     constructor(matchID) {
@@ -10,4 +11,4 @@ class Match{
     }
 }
 
-exports.myMatch = [matchID]
+module.exports.myMatch = [matchID]

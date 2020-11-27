@@ -4,7 +4,7 @@ const router = express.Router();
 
 class User{
 
-constructor(firstname, lastname, age, email, password, gender, location, interests){
+constructor(firstname, lastname, age, email, password, gender, location){
     this.firstname = firstname;
     this.lastname = lastname;
     this.age = age;
@@ -12,28 +12,16 @@ constructor(firstname, lastname, age, email, password, gender, location, interes
     this.password = password;
     this.gender = gender;
     this.location = location;
-    this.interests = interests;
 
     }
 }
-
-
-class Admin extends User {
-    constructor(firstname, lastname, age, email, password, gender, location, interests){
-    super(firstname, lastname, age, email, password, gender, location, interests);
-    this.adminId = adminId;
-
-    }
-}
-
-
 
 
 // De forskellige brugere
-let user1 = new User ('firstname', 'lastname', 'age', 'email', 'password', 'gender', 'location', 'interest')
-let user2 = new User ('firstname', 'lastname', 'age', 'email', 'password', 'gender', 'location', 'interest')
-let user3 = new User ('firstname', 'lastname', 'age', 'email', 'password', 'gender', 'location', 'interest')
-let user4 = new User ('firstname', 'lastname', 'age', 'email', 'password', 'gender', 'location', 'interest')
+let user1 = new User ('firstname', 'lastname', 'age', 'email', 'password', 'gender', 'location')
+let user2 = new User ('firstname', 'lastname', 'age', 'email', 'password', 'gender', 'location')
+let user3 = new User ('firstname', 'lastname', 'age', 'email', 'password', 'gender', 'location')
+let user4 = new User ('firstname', 'lastname', 'age', 'email', 'password', 'gender', 'location')
 
 let allUsers = [user1, user2, user3, user4,]
 
