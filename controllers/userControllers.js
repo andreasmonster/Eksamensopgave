@@ -1,6 +1,5 @@
-const { Router } = require("express");
 const express = require("express");
-const router = express.router();
+const router = express.Router();
 const userControllers = require("../models/userModels");
 
 //Vi får (GET) Usersne
@@ -30,6 +29,4 @@ router.get("/", (req, res) => {
        res.json({"message": "Updated User!"})
        });
 
-
-module.exports = userController;
 module.exports = router;

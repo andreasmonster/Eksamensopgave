@@ -16,6 +16,5 @@ router.delete("/", (req, res) => {
    res.json({"message": "Deleted match"})
    
    });
-  
-  module.exports = router;
+
    module.exports = router;
