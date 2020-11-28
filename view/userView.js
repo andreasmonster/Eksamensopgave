@@ -36,7 +36,7 @@ let err = "Kunne ikke oprette bruger"
 let datapath = JSON.stringify(userID);
 
 // Vi laver en eventlistener, som kører funktionen når vi klikker, på knappen.
-document.getElementById("regButton").addEventListener("click", function() {
+document.getElementById("regButton").addEventListener("submit", function() {
 // Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
 fs.writeFileSync(dataPath,'User1.json', datapath) 
 
@@ -44,3 +44,5 @@ fs.writeFileSync(dataPath,'User1.json', datapath)
 });
 
 })
+
+module.exports = userView

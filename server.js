@@ -12,6 +12,7 @@ const matchControllers = require("./controllers/matchControllers.js");
 // Crud-endpoints
 app.use('/User', userControllers); // endpoint
 app.use('/Match', matchControllers); // endpoint
+app.use('/User/register', userControllers); //endpoints
 
 // Vi kører vores index-fil her.
 fs.readFile('../Eksamensopgave/frontend/index.html', function (err, html) {
