@@ -2,8 +2,8 @@ const express = require("express");
 const userView = require("../models/userModels");
 const fs = require('fs');
 const router = express.Router();
-
-const dataPath = "./backend/" // Kildehenvisning til Mads Holmvang
+const err = "error";
+const dataPath = "./backend/"; // Kildehenvisning til Mads Holmvang
 
 
 // CRUD-endpoints
@@ -33,13 +33,23 @@ cpr = req.body.email
 gender = req.body.gender
 
 
-// Vi brugeren bliver oprettet, bliver den sendt til datapath, som en json fil
+// Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
 let datapath = JSON.stringify(userID);
-fs.writeFileSync(dataPath + 'User1.json')
+fs.writeFileSync(dataPath + 'User1.json', function (err){
+    if (err) {
+        return console.log(err)
+    }
+    console.log(err)
+})
 
 });
 
-exports.userView
+document.addEventListener('DOMcontentLoaded', () =>{
+    document.getElementById('regButton').addEventListener("click", userID )
+}
+
+
+)
 
 
 
