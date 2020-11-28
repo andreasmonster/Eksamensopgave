@@ -2,8 +2,7 @@ const express = require("express");
 const userView = require("../models/userModels");
 const fs = require('fs');
 const router = express.Router();
-const err = "error";
-const dataPath = "./backend/"; // Kildehenvisning til Mads Holmvang
+const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang
 
 
 // CRUD-endpoints
@@ -25,33 +24,23 @@ router.post("/User/register", (req, res) => {
 
     // Vi giver den en id, som er Datoen lavet om til en string
 const userID = Date.now().toString();
-firstname = req.body.firstname
-lastname = req.body.lastname
-password = req.body.password
-email = req.body.email
-cpr = req.body.email
-gender = req.body.gender
+var firstname = req.body.firstname;
+var lastname = req.body.lastname;
+var password = req.body.password;
+var email = req.body.email;
+var cpr = req.body.cpr;
+var gender = req.body.gender;
 
-
-// Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
+// Vi laver det input vi får i userID, til strings.
+let err = "Kunne ikke oprette bruger"
 let datapath = JSON.stringify(userID);
-fs.writeFileSync(dataPath + 'User1.json', function (err){
-    if (err) {
-        return console.log(err)
-    }
-    console.log(err)
-})
+
+// Vi laver en eventlistener, som kører funktionen når vi klikker, på knappen.
+document.getElementById("regButton").addEventListener("click", function() {
+// Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
+fs.writeFileSync(dataPath,'User1.json', datapath) 
+
 
 });
 
-document.addEventListener('DOMcontentLoaded', () =>{
-    document.getElementById('regButton').addEventListener("click", userID )
-}
-
-
-)
-
-
-
-
-//GIT Test2
+})
