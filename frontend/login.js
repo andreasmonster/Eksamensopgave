@@ -6,7 +6,7 @@ function login(){
 var password = document.getElementById('password')
 var email = document.getElementById('email')
 
-// Vi opretter variabel, som tager værdien af password & Email
+// Vi opretter variabel, som tager værdien af password & Email variablen
 let loginInformation = {
 password: password.value,
 email: email.value,
@@ -22,10 +22,8 @@ email: email.value,
     .then(response => response.json())
     .then(data => {
       console.log('Logget ind:', data);
-      // Vi laver en local storage, som akrivere data (email + pw), med en key, som hedder "aktiv"
-      localStorage.setItem("aktiv", JSON.stringify(data))
-      // Her siger, vi at den skal åbne en ny html fil (brugerinterface)
-      window.location="interface.html"
+      localStorage.setItem("aktiv", JSON.stringify(data))  // Vi laver en local storage, som akrivere data (email + pw), med en key, som hedder "aktiv"
+      window.location="interface.html" // Her siger, vi at den skal åbne en ny html fil (brugerinterface), hvis
       
     })
     .catch((error) => {

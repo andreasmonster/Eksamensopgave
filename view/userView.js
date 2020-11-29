@@ -11,7 +11,7 @@ const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvil
 // CRUD-endpoints
 
 // Får informationer for brugeren
-router.get("/", (req, res) => {
+router.get("/interface", (req, res) => {
 });
 
 // Sletter Brugeren
@@ -28,16 +28,16 @@ router.post("/login", (req, res) => {
 
     console.log(req.body)
 
+// Let user går ind og finder emailen i json filen
 let user = JSON.parse(fs.readFileSync(dataPath + "/"+req.body.email + ".json"))
 console.log(user)
-if(user.password == req.body.password){
-    res.json(user)
+if(user.password == req.body.password){ // Hvis passwordet der bliver tastet, er det samme som det oprettede (req.body.passowrd)
+    res.json(user) // Sender den det videre, som res.json (user)
 } else  {
-    res.json({err: "Error"})
+    res.json({err: "Error"}) // hvis password der er indtastet ikke matcher det vi har i JSON filen, thrower vi en error.
 }
 
 })
-
 
 // Opretter en bruger
 router.post("/", (req, res) => {
