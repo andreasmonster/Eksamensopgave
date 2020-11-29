@@ -1,8 +1,11 @@
 const express = require("express");
-const userView = require("../models/userModels");
+const User = require("../models/userModels");
 const fs = require('fs');
 const router = express.Router();
-const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang
+const err = "Error";
+
+const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvilken mappe, vi skal gemme JSON filerne til
+
 
 
 // CRUD-endpoints
@@ -19,30 +22,40 @@ router.delete("/", (req, res) =>{
 router.put("/", (req, res) => {
 });
 
-// Opretter en bruger
-router.post("/User/register", (req, res) => {
 
-    // Vi giver den en id, som er Datoen lavet om til en string
-const userID = Date.now().toString();
-var firstname = req.body.firstname;
-var lastname = req.body.lastname;
-var password = req.body.password;
-var email = req.body.email;
-var cpr = req.body.cpr;
-var gender = req.body.gender;
+// Login funtkion
+router.post("/login", (req, res) => {
 
-// Vi laver det input vi får i userID, til strings.
-let err = "Kunne ikke oprette bruger"
-let datapath = JSON.stringify(userID);
+    console.log(req.body)
 
-// Vi laver en eventlistener, som kører funktionen når vi klikker, på knappen.
-document.getElementById("regButton").addEventListener("submit", function() {
-// Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
-fs.writeFileSync(dataPath,'User1.json', datapath) 
-
-
-});
+let user = JSON.parse(fs.readFileSync(dataPath + "/"+req.body.email + ".json"))
+console.log(user)
+if(user.password == req.body.password){
+    res.json(user)
+} else  {
+    res.json({err: "Error"})
+}
 
 })
 
-module.exports = userView
+
+// Opretter en bruger
+router.post("/", (req, res) => {
+
+const createdUser = new User(req.body.firstname,
+    req.body.lastname,
+    req.body.age,
+    req.body.email,
+    req.body.password,
+    req.body.gender
+    )
+
+// Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
+// Filnavnet, er emailen der bliver indtastet (req.body.email)
+fs.writeFileSync(dataPath + "/"+req.body.email + ".json", JSON.stringify(createdUser)), err =>  {
+    if (err) throw error;
+
+} 
+})
+
+module.exports = router;

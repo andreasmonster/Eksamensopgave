@@ -17,3 +17,20 @@ Finder useren --> Opdaterer useren i arrayet --> sender array tilbage i model, s
 
 Til Database:
 Lave mappe der hedder client, og lav index & html derovre.
+
+
+
+
+
+
+
+Tomt array
+Reader filerne
+WRiter filerne
+Pusher filerne
+
+
+
+Sæt localStorage til Active User
+Sæt en funktion, der kigger i LocalStarge
+Ligger der en activeuser = noget, så kan man logge ind.

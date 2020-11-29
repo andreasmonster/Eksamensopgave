@@ -20,13 +20,13 @@
             <h2>Opret bruger</h2>
                 </div>
                 
-<div id=""
-                <form class="form" id="form">
+
+                <form class="form" id="signupform">
 
 
                     <div class="form-control">
                         <label>Fornavn</label>
-                           <input name="firstname" type="text" placeholder="indtast fornavn" id="firstname">
+                           <input name="firstname" type="text" placeholder="indtast fornavn" id="firstname", value="OP">
                              <small>Error</small>
                                </div>
 
@@ -35,7 +35,7 @@
                                    <input name="lastname" type="text" placeholder="Indtast efternavn" id="lastname">
                                      <small>Error</small>
                                        </div>
-
+                    
 
                     <div class="form-control">
                      <label>Adgangskode</label>
@@ -50,13 +50,6 @@
                                     <small>Error message</small>
                                      </div>
 
-                                <form class="form" id="form">
-                                    <div class="form-control">
-                                     <label>CPR-nummer</label>
-                                        <input name="cpr" type="number" placeholder="indtast CPR-nummer" id="cpr">
-                                            <small>Error message</small>
-                                             </div>
-
 
                                              <div class="form-control">
                                                 <label>Køn</label>
@@ -64,14 +57,14 @@
                                                      <small>Error</small>
                                                        </div>
 
-        <button id="regButton">Opret</button>
+        <button id="regButton" onclick=userCreate() type="button">Opret</button>
 
-        </form>
+      </form>
     </div>
 
-<script src="userView.js"></script>
+<script src="./index.js"></script>
 
 </body>
 </html>
 
- 
+

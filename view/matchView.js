@@ -21,4 +21,4 @@ router.delete("/", (req, res) =>{
 });
 
 
-exports = matchView;
+module.exports = matchView;
