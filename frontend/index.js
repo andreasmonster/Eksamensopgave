@@ -24,9 +24,7 @@ function userCreate(){
         body: JSON.stringify( // Vi laver attributterne i body, om til JSON
           user
         )
-        .then(
-            window.location="login.html" // Her siger vi, at når vi har oprettet brugeren redirector den til Login siden
-        )
+        
     }).catch(err => {
         console.log(err) // Vi fanger en error, hvis dette forekommer
     })

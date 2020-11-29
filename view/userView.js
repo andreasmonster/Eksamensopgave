@@ -26,12 +26,12 @@ router.put("/", (req, res) => {
 // Login funtkion
 router.post("/login", (req, res) => {
 
-    console.log(req.body)
+    console.log(req.body) 
 
 // Let user går ind og finder emailen i json filen
 let user = JSON.parse(fs.readFileSync(dataPath + "/"+req.body.email + ".json"))
 console.log(user)
-if(user.password == req.body.password){ // Hvis passwordet der bliver tastet, er det samme som det oprettede (req.body.passowrd)
+if(user.password == req.body.password & user.email == req.body.email){ // Hvis passwordet der bliver tastet, er det samme som det oprettede (req.body.passowrd)
     res.json(user) // Sender den det videre, som res.json (user)
 } else  {
     res.json({err: "Error"}) // hvis password der er indtastet ikke matcher det vi har i JSON filen, thrower vi en error.
