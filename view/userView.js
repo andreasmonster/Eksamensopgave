@@ -15,7 +15,14 @@ router.get("/interface", (req, res) => {
 });
 
 // Sletter Brugeren
-router.delete("/", (req, res) =>{
+router.delete("/delete", (req, res) =>{
+    fs.unlink(dataPath +"/"+email + ".json")
+    if (err) {
+        console.log(err)
+    } else {
+        return "user deleted"
+    }
+
 });
 
 // Opdaterer Brugeren
@@ -28,10 +35,10 @@ router.post("/login", (req, res) => {
 
     console.log(req.body) 
 
-// Let user går ind og finder emailen i json filen
+// Let user går ind og finder emailen i json filen 
 let user = JSON.parse(fs.readFileSync(dataPath + "/"+req.body.email + ".json"))
 console.log(user)
-if(user.password == req.body.password & user.email == req.body.email){ // Hvis passwordet der bliver tastet, er det samme som det oprettede (req.body.passowrd)
+if(user.password == req.body.password && user.email == req.body.email){ // Hvis passwordet der bliver tastet, er det samme som det oprettede (req.body.passowrd)
     res.json(user) // Sender den det videre, som res.json (user)
 } else  {
     res.json({err: "Error"}) // hvis password der er indtastet ikke matcher det vi har i JSON filen, thrower vi en error.
@@ -52,7 +59,7 @@ const createdUser = new User(req.body.firstname,
 
 // Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
 // Filnavnet, er emailen der bliver indtastet (req.body.email)
-fs.writeFileSync(dataPath + "/"+req.body.email + ".json", JSON.stringify(createdUser)), err =>  {
+fs.writeFileSync(dataPath + "/" +req.body.email + ".json", JSON.stringify(createdUser)), err =>  {
     if (err) throw error;
 
 } 

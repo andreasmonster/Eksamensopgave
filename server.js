@@ -7,6 +7,7 @@ const bodyparser = require('body-parser')
 
 app.use(bodyparser.json()) // Bodyparser fjerner strings
 app.use(cors())
+
 // Require for Routes
 const userControllers = require("./controllers/userControllers.js");
 const matchControllers = require("./controllers/matchControllers.js");
