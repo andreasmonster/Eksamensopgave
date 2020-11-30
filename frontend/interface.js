@@ -28,5 +28,46 @@ function deleteUser(){
  }).catch(err => {
    console.error(err)
  });
+    window.location="index.html"
+}
+
+// Kildeliste til Assignment 3, i programmering
+// Funktion der laver et nye TR (table row), for hvert objekt af user der er i vores LocalStorage
+document.addEventListener("DOMContentLoaded", function() {
+    var user = JSON.parse(localStorage.getItem("aktiv"))
+    let table = document.getElementById("userTable");
+    let html ="";
+    let userKeys = Object.keys(user);
+    let userValues = Object.values(user);
+
+    var j = 0
+    for (let i of userKeys) {
+        html += "<tr><td>" + i + "</td><td>" + userValues[j] + "</td></tr>";
+        j += 1
+    }
+
+    table.innerHTML = html;
+});
+
+
+
+
+function updateUser() {
+
+
+// Vi har ingen body, eftersom at vi ikke skal have noget tilbage --> vi sletter noget
+    fetch("http://localhost:3000/User/register/update/",{
+    method: 'PUT',
+    headers: {
+        'Content-type': 'application/json',
+    },
+    body: JSON.stringify("aktiv"),
+
+}).then(() => {
+    console.log('has been updated');
+ }).catch(err => {
+   console.error(err)
+ });
 
 }
+

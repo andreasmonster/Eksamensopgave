@@ -21,15 +21,73 @@
                 </div>
                 
 
+
+                
+
+                  
                 <form class="form" id="user">
 
-        <button id="regButton" onclick=update() type="button">Update</button>
+                  <table id="userTable">
+                    <td></td>
+                  </table>
+
+                  
+
+
+
+
         <button id="regButton" onclick=logout() type="button">Logout</button>
         <button id="regButton" onclick=deleteUser() type="button">Delete</button>
 
 
       </form>
     </div>
+
+
+
+    <div class ="container">
+      <div class="header">
+        <h2>Update User:</h2>
+          </div>
+          <form class="form" id="updateUser">
+          <div class="form-control">
+            <label>Fornavn</label>
+               <input name="firstname" type="text" placeholder="indtast fornavn" id="firstname">
+                 <small>Error</small>
+                   </div>
+
+                   <div class="form-control">
+                    <label>Efternavn</label>
+                       <input name="lastname" type="text" placeholder="Indtast efternavn" id="lastname">
+                         <small>Error</small>
+                           </div>
+        
+
+        <div class="form-control">
+         <label>Adgangskode</label>
+            <input name="password" type="password" placeholder="indtast Adgangskode" id="password">
+              <small>Error</small>
+                </div>
+
+            <form class="form" id="form">
+                <div class="form-control">
+                 <label>Email</label>
+                    <input name="email" type="text" placeholder="indtast email" id="email">
+                        <small>Error message</small>
+                         </div>
+
+
+                                 <div class="form-control">
+                                    <label>Køn</label>
+                                       <input name="gender" type="gender" placeholder="Indtast dit køn" id="gender">
+                                         <small>Error</small>
+                                           </div>
+
+          
+          <button id="regButton" onclick=update() type="button">Update</button>
+    </form>
+    </div>
+
 
 
 
@@ -44,6 +102,11 @@
           <button id="regButton" onclick=Dislike() type="button">Dislike</button>
     </form>
     </div>
+
+
+
+
+
 
 <script src="./interface.js"></script>
 

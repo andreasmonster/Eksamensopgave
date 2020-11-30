@@ -27,10 +27,20 @@ router.delete("/delete", (req, res) =>{
 });
 
 
-
-// Opdaterer Brugeren
-router.put("/", (req, res) => {
-});
+/*
+// Opdaterer BrugerenW
+router.put("/Update", (req, res) => {
+fs.readFileSync(dataPath + "/"+req.body.email + "json", (err => {
+if (err){ throw (err);
+req.body.firstname,
+req.body.lastname,
+req.body.age,
+req.body.email,
+req.body.password,
+req.body.gender
+}
+}
+*/
 
 
 // Login funtkion
@@ -45,9 +55,9 @@ if(user.password == req.body.password && user.email == req.body.email){ // Hvis 
     res.json(user) // Sender den det videre, som res.json (user)
 } else  {
     res.json({err: "Error"}) // hvis password der er indtastet ikke matcher det vi har i JSON filen, thrower vi en error.
-}
+    }
+});
 
-})
 
 // Opretter en bruger
 router.post("/", (req, res) => {
