@@ -6,24 +6,27 @@ function logout(){
 
 }
 
+
 // Slette bruger funktion
-function deleteUser(email){
+function deleteUser(){
 
-
-    var userDel = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key
+    let userDel = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
     console.log(userDel);
-    var email = JSON.parse(userDel).email
-    console.log(email);
+    var email = JSON.parse(userDel) // Vi parser herefter informationerne, vi får fra keyen
+    console.log(email.email);
 
 // Vi har ingen body, eftersom at vi ikke skal have noget tilbage --> vi sletter noget
     fetch("http://localhost:3000/User/register/delete/",{
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+        'Content-type': 'application/json',
+    },
+    body: JSON.stringify(email),
 
 }).then(() => {
-    console.log('removed');
+    console.log('has been removed');
  }).catch(err => {
    console.error(err)
  });
 
 }
-

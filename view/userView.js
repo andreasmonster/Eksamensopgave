@@ -14,16 +14,19 @@ const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvil
 router.get("/interface", (req, res) => {
 });
 
+
 // Sletter Brugeren
 router.delete("/delete", (req, res) =>{
-    fs.unlink(dataPath +"/"+email + ".json")
-    if (err) {
-        console.log(err)
+    email = req.body.email // Vi definere, at email (som er aktiv key, i Localhost), er navnet på den mail vi har oprettet
+    fs.unlink(dataPath +"/"+email + ".json", (err) => { // Vi går ind og fjerne den key som er oprettet
+    if (err){ throw (err)
     } else {
-        return "user deleted"
+        console.log("Profile deleted")
     }
-
+  })
 });
+
+
 
 // Opdaterer Brugeren
 router.put("/", (req, res) => {
@@ -49,7 +52,8 @@ if(user.password == req.body.password && user.email == req.body.email){ // Hvis 
 // Opretter en bruger
 router.post("/", (req, res) => {
 
-const createdUser = new User(req.body.firstname,
+const createdUser = new User(
+    req.body.firstname,
     req.body.lastname,
     req.body.age,
     req.body.email,
@@ -64,5 +68,4 @@ fs.writeFileSync(dataPath + "/" +req.body.email + ".json", JSON.stringify(create
 
 } 
 })
-
 module.exports = router;
