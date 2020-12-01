@@ -13,11 +13,6 @@ const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvil
 router.post("/potentialMatch", (req, res) => {
 
 
-
-
-
-
-
 fs.readdir(dataPath, (err, files) => {
     files.forEach(file => {
     let userMatch  = JSON.parse(fs.readFileSync(dataPath +"/"+file))
@@ -29,12 +24,6 @@ fs.readdir(dataPath, (err, files) => {
       })
     })
 });   
-
-
-router.get("/dislike", (req, res) => {
-
-});
-
 
 
 // Får informationer for brugeren
