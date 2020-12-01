@@ -11,6 +11,13 @@ const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvil
 // CRUD-endpoints
 
 router.post("/potentialMatch", (req, res) => {
+
+
+
+
+
+
+
 fs.readdir(dataPath, (err, files) => {
     files.forEach(file => {
     let userMatch  = JSON.parse(fs.readFileSync(dataPath +"/"+file))
@@ -78,7 +85,7 @@ const createdUser = new User(
     req.body.interest,
     req.body.like,
     req.body.dislike,
-    )
+        )
 
 // Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
 // Filnavnet, er emailen der bliver indtastet (req.body.email)
@@ -88,3 +95,6 @@ fs.writeFileSync(dataPath + "/" +req.body.email + ".json", JSON.stringify(create
 } 
 })
 module.exports = router;
+
+
+
