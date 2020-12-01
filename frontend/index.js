@@ -4,6 +4,8 @@ var lastname = document.getElementById('lastname')
 var password = document.getElementById('password')
 var email = document.getElementById('email')
 var gender = document.getElementById('gender')
+var interest = document.getElementById('interest')
+
 
 
 function userCreate(){
@@ -12,7 +14,8 @@ function userCreate(){
         lastname: lastname.value,
         password: password.value,
         email: email.value,
-        gender: gender.value
+        gender: gender.value,
+        interest: interest.value
     }
     console.log(user)
     // vi Henter data, fra dette Endpoint i serveren

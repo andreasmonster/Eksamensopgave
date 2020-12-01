@@ -10,6 +10,26 @@ const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvil
 
 // CRUD-endpoints
 
+router.post("/potentialMatch", (req, res) => {
+fs.readdir(dataPath, (err, files) => {
+    files.forEach(file => {
+    let userMatch  = JSON.parse(fs.readFileSync(dataPath +"/"+file))
+    console.log(userMatch)
+
+    if(userMatch.interest == req.body.gender && userMatch.gender == req.body.interest){
+    res.json(userMatch) // Sender den det videre, som res.json (user)
+        }
+      })
+    })
+});   
+
+
+router.get("/dislike", (req, res) => {
+
+});
+
+
+
 // Får informationer for brugeren
 router.get("/interface", (req, res) => {
 });
@@ -27,20 +47,6 @@ router.delete("/delete", (req, res) =>{
 });
 
 
-/*
-// Opdaterer BrugerenW
-router.put("/Update", (req, res) => {
-fs.readFileSync(dataPath + "/"+req.body.email + "json", (err => {
-if (err){ throw (err);
-req.body.firstname,
-req.body.lastname,
-req.body.age,
-req.body.email,
-req.body.password,
-req.body.gender
-}
-}
-*/
 
 
 // Login funtkion
@@ -68,7 +74,10 @@ const createdUser = new User(
     req.body.age,
     req.body.email,
     req.body.password,
-    req.body.gender
+    req.body.gender,
+    req.body.interest,
+    req.body.like,
+    req.body.dislike,
     )
 
 // Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil

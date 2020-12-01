@@ -1,4 +1,5 @@
 
+// Logge ud funktion
 function logout(){
 
     window.localStorage.clear(); // Den clear localstorage, når vi kører funktionen
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
+// Opdater bruger
 function updateUser() {
 
 
@@ -71,3 +72,75 @@ function updateUser() {
 
 }
 
+
+// Loade potentielle matches
+document.addEventListener("DOMContentLoaded", function() {
+
+    let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
+    console.log(userInterest);
+    var interestUser = JSON.parse(userInterest) // Vi parser herefter informationerne, vi får fra keyen
+    console.log(userInterest.interestUser);
+
+    fetch("http://localhost:3000/User/register/potentialMatch", {
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(interestUser)
+    }).then(response => response.json())
+    .then(data =>{
+        console.log("matched with", data);
+        let table = document.getElementById("potentialMatch")
+        localStorage.setItem("aktivMatch", JSON.stringify(data))
+        let html ="";
+    
+// Table, der viser vores 
+        html += "<tr><td>" + "Firstname" + "</td><td>" + data.firstname + "</td></tr>";
+        html += "<tr><td>" + "Lastname" + "</td><td>" + data.lastname + "</td></tr>";
+        html += "<tr><td>" + "Interest" + "</td><td>" + data.interest + "</td></tr>";
+        html += "<tr><td>" + "Gender" + "</td><td>" + data.gender + "</td></tr>";
+        
+
+    table.innerHTML = html;
+
+
+})
+
+});
+
+
+// Disliker funktion
+function Dislike() {
+
+
+    let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
+    var interestUser = JSON.parse(userInterest) // Vi parser herefter informationerne, vi får fra keyen
+
+    
+    let userDislike = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
+    var dislikeUser = JSON.parse(userDislike) // Vi parser herefter informationerne, vi får fra keyen
+
+    
+
+    fetch("http://localhost:3000/User/register/potentialMatch", {
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(interestUser, dislikeUser)
+    }).then(response => response.json())
+    .then(data =>{
+        console.log("You disliked", data);
+        let table = document.getElementById("potentialMatch")
+        let html ="";
+    
+// Table, der viser vores 
+
+        
+
+    table.innerHTML = html;
+
+
+})
+
+};
