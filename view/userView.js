@@ -8,60 +8,10 @@ const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvil
 
 
 
-// CRUD-endpoints
-
-// Finder Potentielle matches, baseret på gender & interest
-router.post("/potentialMatch", (req, res) => {
-
-fs.readdir(dataPath, (err, files) => {
-    var sent = false;
-     files.forEach(file => {
-
-    var potentialUser = JSON.parse(fs.readFileSync(dataPath +"/"+file))
-        if(sent == false) {
-             if(req.body.gender == potentialUser.interest && req.body.interest == potentialUser.gender){
-
-        // Disliked
-        var disliked = false
-          var potentialUserValues = Object.values(potentialUser)
-            var potentialUserDislikedArray = potentialUserValues[7];
-
-        for(i = 0; potentialUserDislikedArray.length > i; i++){ 
-            if(potentialUserDislikedArray[i] == req.body.email){
-                disliked = true
-                
-            };
-        };
-
-        
-       // Liked 
-        var liked = false
-            var potentialUserValues = Object.values(potentialUser)
-                var potentialUserLikeArray = potentialUserValues[6];
-
-                for(i = 0; potentialUserLikeArray.lenght > i; i++){
-                    if(potentialUserlikedArray[i] == req.body.email){
-                        liked = true
-                    };
-                };
-
-        
-        
-        if(disliked == false && liked == false){
-            res.json(potentialUser) // Sender den det videre, som res.json (user)
-                sent = true
-
-           };
-          };
-        };
-      });
-    });
-  });   
-
 
 
   // Like Post
-router.post("/Like", (req, res) => {
+  router.post("/Like", (req, res) => {
 
     // Får emailen af den nuværende bruger, samt emailen på det potentielle match
     var potentialUserEmail = req.body[1]; // indekset i body-arrayet, i fetch
@@ -113,7 +63,7 @@ router.post("/dislike", (req, res) => {
 
 
     // Vi laver herefter et nyt array, med brugeren som allerede er logget ind's, email.
-    var newArray = new Array(userEmail);
+    let newArray = new Array(userEmail);
 
     // Vi laver et loop, som starter på plads 0, og som kører igennem oldArray (potentielt user match), hvis længden er større end indeks [i], incrementer vi med 1.
     // Og derfor tilføjer gamle dislikes til nyt array.
@@ -134,12 +84,67 @@ router.post("/dislike", (req, res) => {
 
 
 
-// Får informationer for brugeren
+
+// CRUD-endpoints
+
+// Finder Potentielle matches, baseret på gender & interest
+router.post("/potentialMatch", (req, res) => {
+
+fs.readdir(dataPath, (err, files) => {
+    var sent = false;
+     files.forEach(file => {
+
+    var potentialUser = JSON.parse(fs.readFileSync(dataPath +"/"+file))
+        if(sent == false) {
+             if(req.body.gender == potentialUser.interest && req.body.interest == potentialUser.gender){
+
+      // Disliked
+        var disliked = false
+          var potentialUserValues = Object.values(potentialUser)
+            var potentialUserDislikedArray = potentialUserValues[7];
+
+        for(i = 0; potentialUserDislikedArray.length > i; i++){ 
+            if(potentialUserDislikedArray[i] == req.body.email){
+                disliked = true
+                
+            };
+        };
+
+        
+       // Liked 
+        var liked = false
+            var potentialUserValues = Object.values(potentialUser)
+                var potentialUserLikedArray = potentialUserValues[6];
+
+                for(i = 0; potentialUserLikedArray.length > i; i++){ 
+                    if(potentialUserLikedArray[i] == req.body.email){
+                        liked = true
+
+                };
+            };
+
+        
+        
+        if(disliked == false && liked == false){
+            res.json(potentialUser) // Sender den det videre, som res.json (user)
+                sent = true
+
+           }
+          }
+        }
+      })
+    });
+  });  
+
+
+
+
+// Interface - får informationer om brugeren, som er logget ind.
 router.get("/interface", (req, res) => {
 });
 
 
-// Sletter Brugeren
+// Delete - Sletter Brugeren
 router.delete("/delete", (req, res) =>{
     email = req.body.email // Vi definere, at email (som er aktiv key, i Localhost), er navnet på den mail vi har oprettet
     fs.unlink(dataPath +"/"+email + ".json", (err) => { // Vi går ind og fjerne den key som er oprettet
@@ -149,6 +154,8 @@ router.delete("/delete", (req, res) =>{
     }
   })
 });
+
+
 
 
 

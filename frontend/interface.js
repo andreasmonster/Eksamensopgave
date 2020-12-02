@@ -34,25 +34,6 @@ function deleteUser(){
     window.location="index.html"
 }
 
-// Logged ind bruger
-// Kildeliste til Assignment 3, i programmering
-// Funktion der laver et nye TR (table row), for hvert objekt af user der er i vores LocalStorage
-document.addEventListener("DOMContentLoaded", function() {
-    var user = JSON.parse(localStorage.getItem("aktiv"))
-    let table = document.getElementById("userTable");
-    let html ="";
-    let userKeys = Object.keys(user);
-    let userValues = Object.values(user);
-
-    var j = 0
-    for (let i of userKeys) {
-        html += "<tr><td>" + i + "</td><td>" + userValues[j] + "</td></tr>";
-        j += 1
-    }
-
-    table.innerHTML = html;
-});
-
 
 
 // Opdater bruger
@@ -76,59 +57,24 @@ function updateUser() {
 }
 
 
-// Loade potentielle matches
-document.addEventListener("DOMContentLoaded", function() {
-
-    let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
-
-    var interestUser = JSON.parse(userInterest) // Vi parser herefter informationerne, vi får fra keyen
-    console.log(userInterest.interestUser);
-
-    fetch("http://localhost:3000/User/register/potentialMatch/", {
-        method: "POST",
-        headers: {
-            'Content-type': 'application/json',
-        },
-        body: JSON.stringify(interestUser)
-    }).then(response => response.json())
-    .then(data =>{
-        console.log("matched with", data);
-        let table = document.getElementById("potentialMatch")
-        localStorage.setItem("aktivMatch", JSON.stringify(data))
-        let html ="";
-    
-// Table, der viser vores 
-        html += "<tr><td>" + "Firstname" + "</td><td>" + data.firstname + "</td></tr>";
-        html += "<tr><td>" + "Lastname" + "</td><td>" + data.lastname + "</td></tr>";
-        html += "<tr><td>" + "Interest" + "</td><td>" + data.interest + "</td></tr>";
-        html += "<tr><td>" + "Gender" + "</td><td>" + data.gender + "</td></tr>";
-        
-
-    table.innerHTML = html;
-
-
-})
-
-});
-
 
 // Disliker funktion
 function Dislike() {
 
     // Her får vi de nuværende brugeres køn og interesser (hvad de søger)
     let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
-    var interestUser = JSON.parse(userInterest);
+        var interestUser = JSON.parse(userInterest);
 
     // Her får vi vist, den nuværende bruger
     let potentialUserInterest = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
-    var potentialUser = JSON.parse(potentialUserInterest);  // Vi parser herefter informationerne, vi får fra keyen
+        var potentialUser = JSON.parse(potentialUserInterest);  // Vi parser herefter informationerne, vi får fra keyen
     
-    fetch("http://localhost:3000/User/register/dislike/", {
+    fetch("http://localhost:3000/User/register/dislike", {
         method: "POST",
         headers: {
             'Content-type': 'application/json',
         },
-        body: JSON.stringify([interestUser, potentialUser]), // Problem her
+        body: JSON.stringify([interestUser, potentialUser]),
 
     })
 
@@ -164,18 +110,17 @@ function Dislike() {
 
 
 // Like user
-
 function Like() {
 
     // Her får vi de nuværende brugeres køn og interesser (hvad de søger)
     let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
-    var interestUser = JSON.parse(userInterest);
+        var interestUser = JSON.parse(userInterest);
 
     // Her får vi vist, den nuværende bruger
     let potentialUserInterest = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
-    var potentialUser = JSON.parse(potentialUserInterest);  // Vi parser herefter informationerne, vi får fra keyen
+        var potentialUser = JSON.parse(potentialUserInterest);  // Vi parser herefter informationerne, vi får fra keyen
     
-    fetch("http://localhost:3000/User/register/like/", {
+    fetch("http://localhost:3000/User/register/like", {
         method: "POST",
         headers: {
             'Content-type': 'application/json',
@@ -189,4 +134,60 @@ function Like() {
 
   });
 
-};
+};  
+
+
+// User
+// Kildeliste til Assignment 3, i programmering
+// Funktion der laver et nye TR (table row), for hvert objekt af user der er i vores LocalStorage
+document.addEventListener("DOMContentLoaded", function() {
+    var user = JSON.parse(localStorage.getItem("aktiv"))
+    let table = document.getElementById("userTable");
+    let html ="";
+    let userKeys = Object.keys(user);
+    let userValues = Object.values(user);
+
+    var j = 0
+    for (let i of userKeys) {
+        html += "<tr><td>" + i + "</td><td>" + userValues[j] + "</td></tr>";
+        j += 1
+    }
+
+    table.innerHTML = html;
+});
+
+
+// Loade potentielle matches
+document.addEventListener("DOMContentLoaded", function() {
+
+    let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
+
+    var interestUser = JSON.parse(userInterest) // Vi parser herefter informationerne, vi får fra keyen
+    console.log(userInterest.interestUser);
+
+    fetch("http://localhost:3000/User/register/potentialMatch/", {
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(interestUser)
+    }).then(response => response.json())
+    .then(data =>{
+        console.log("Potential match, with", data.firstname);
+        let table = document.getElementById("potentialMatch")
+        localStorage.setItem("aktivMatch", JSON.stringify(data))
+        let html ="";
+    
+// Table, der viser vores 
+        html += "<tr><td>" + "Firstname" + "</td><td>" + data.firstname + "</td></tr>";
+        html += "<tr><td>" + "Lastname" + "</td><td>" + data.lastname + "</td></tr>";
+        html += "<tr><td>" + "Interest" + "</td><td>" + data.interest + "</td></tr>";
+        html += "<tr><td>" + "Gender" + "</td><td>" + data.gender + "</td></tr>";
+        
+
+    table.innerHTML = html;
+
+
+})
+
+});
