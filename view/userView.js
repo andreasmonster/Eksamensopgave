@@ -34,10 +34,10 @@ fs.readdir(dataPath, (err, files) => {
         };
 
         
-     /*   // Liked 
+       // Liked 
         var liked = false
             var potentialUserValues = Object.values(potentialUser)
-                var potentialUserLikeArray = potentialUserValues[7];
+                var potentialUserLikeArray = potentialUserValues[6];
 
                 for(i = 0; potentialUserLikeArray.lenght > i; i++){
                     if(potentialUserDislikedArray[i] == req.body.email){
@@ -45,7 +45,7 @@ fs.readdir(dataPath, (err, files) => {
                     };
                 };
 
-        */
+        
         
         if(disliked == false){
             res.json(potentialUser) // Sender den det videre, som res.json (user)
@@ -65,16 +65,16 @@ router.post("/dislike", (req, res) => {
     // Får emailen af den nuværende bruger, samt emailen på det potentielle match
     var potentialUserEmail = req.body[1]; // indekset i body-arrayet, i fetch
     var userEmail = req.body[0].email // Indekset i body-arreyet, i fetch.
-    console.log("********************************")
+   
 
     // Vi finder det potentielle match, via vedkommenes email i vores 'Backend'
-    let potentialUser = JSON.parse(fs.readFileSync(dataPath +"/"+potentialUserEmail + ".json"));
+    let potentialUser = JSON.parse(fs.readFileSync(dataPath +"/"+ potentialUserEmail.email + ".json"));
 
-
+    console.log(potentialUser);
     // Vi får fat, i de gamle dislikes fra vores 'Backend' mappe.
     var potentialUserValuesOld = Object.values(potentialUser)
-    var oldArray = potentialUserValuesOld[8]; // NR.8, er vores indeks på dislike, i vores userModel, i Models mappen
-    console.log(potentialUserValuesOld);
+    var oldArray = potentialUserValuesOld[7]; // NR.8, er vores indeks på dislike, i vores userModel, i Models mappen
+    console.log(oldArray);
 
 
     // Vi laver herefter et nyt array, med brugeren som allerede er logget ind's, email.
@@ -91,7 +91,7 @@ router.post("/dislike", (req, res) => {
     // Vi sætter det potentielle matches dislike, ind i et nyt array.
     potentialUser.dislike = newArray
 
-    fs.writeFileSync(dataPath +"/"+potentialUserEmail +".json", JSON.stringify(potentialUser, null, 2))
+    fs.writeFileSync(dataPath +"/"+potentialUserEmail.email +".json", JSON.stringify(potentialUser, null, 2))
 });
 
 

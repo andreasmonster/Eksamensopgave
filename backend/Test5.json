@@ -6,5 +6,7 @@
   "gender": "kvinde",
   "interest": "mand",
   "like": [],
-  "dislike": []
+  "dislike": [
+    "Test4"
+  ]
 }
