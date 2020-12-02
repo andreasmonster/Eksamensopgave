@@ -15,7 +15,10 @@ function userCreate(){
         password: password.value,
         email: email.value,
         gender: gender.value,
-        interest: interest.value
+        interest: interest.value,
+        
+
+
     }
     console.log(user)
     // vi Henter data, fra dette Endpoint i serveren

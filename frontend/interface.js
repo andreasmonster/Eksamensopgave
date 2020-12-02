@@ -1,4 +1,6 @@
 
+
+
 // Logge ud funktion
 function logout(){
 
@@ -32,6 +34,7 @@ function deleteUser(){
     window.location="index.html"
 }
 
+// Logged ind bruger
 // Kildeliste til Assignment 3, i programmering
 // Funktion der laver et nye TR (table row), for hvert objekt af user der er i vores LocalStorage
 document.addEventListener("DOMContentLoaded", function() {
@@ -77,11 +80,10 @@ function updateUser() {
 document.addEventListener("DOMContentLoaded", function() {
 
     let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
-    console.log(userInterest);
     var interestUser = JSON.parse(userInterest) // Vi parser herefter informationerne, vi får fra keyen
     console.log(userInterest.interestUser);
 
-    fetch("http://localhost:3000/User/register/potentialMatch", {
+    fetch("http://localhost:3000/User/register/potentialMatch/", {
         method: "POST",
         headers: {
             'Content-type': 'application/json',
@@ -112,35 +114,47 @@ document.addEventListener("DOMContentLoaded", function() {
 // Disliker funktion
 function Dislike() {
 
-
+    // Her får vi de nuværende brugeres køn og interesser (hvad de søger)
     let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
-    var interestUser = JSON.parse(userInterest) // Vi parser herefter informationerne, vi får fra keyen
+    var interestUser = JSON.parse(userInterest);
 
+    // Her får vi vist, den nuværende bruger
+    let potentialUserInterest = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
+    var potentialUser = JSON.parse(potentialUserInterest);  // Vi parser herefter informationerne, vi får fra keyen
     
-    let userDislike = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
-    var dislikeUser = JSON.parse(userDislike) // Vi parser herefter informationerne, vi får fra keyen
-
-    
-
-    fetch("http://localhost:3000/User/register/potentialMatch", {
+    fetch("http://localhost:3000/User/register/dislike/", {
         method: "POST",
         headers: {
             'Content-type': 'application/json',
         },
-        body: JSON.stringify(interestUser, dislikeUser)
-    }).then(response => response.json())
+        body: JSON.stringify(interestUser, potentialUser]), // Problem her
+
+    })
+
+    .catch((error) => {
+        console.error(error);
+
+  });
+
+};
+
+        
+   /* }).then(response => response.json())
     .then(data =>{
         console.log("You disliked", data);
+
+        var userValues = Object.values(data)
+
         let table = document.getElementById("potentialMatch")
         let html ="";
-    
-// Table, der viser vores 
 
+        html += "<tr><td>" + "Firstname" + "</td><td>" + userValues[0] + "</td></tr>";
+        html += "<tr><td>" + "Lastname" + "</td><td>" + userValues[1] + "</td></tr>";
+        html += "<tr><td>" + "Email" + "</td><td>" + userValues[2] + "</td></tr>";
+        html += "<tr><td>" + "Gender" + "</td><td>" + userValues[4] + "</td></tr>";
+        html += "<tr><td>" + "Interest" + "</td><td>" + userValues[5] + "</td></tr>";
         
 
     table.innerHTML = html;
 
-
-})
-
-};
+*/

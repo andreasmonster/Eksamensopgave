@@ -10,20 +10,92 @@ const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvil
 
 // CRUD-endpoints
 
+// Finder Potentielle matches, baseret på gender & interest i backend mappen (brugerne)
 router.post("/potentialMatch", (req, res) => {
 
-
 fs.readdir(dataPath, (err, files) => {
-    files.forEach(file => {
-    let userMatch  = JSON.parse(fs.readFileSync(dataPath +"/"+file))
-    console.log(userMatch)
+    var sent = false;
+     files.forEach(file => {
 
-    if(userMatch.interest == req.body.gender && userMatch.gender == req.body.interest){
-    res.json(userMatch) // Sender den det videre, som res.json (user)
-        }
-      })
-    })
-});   
+    var potentialUser = JSON.parse(fs.readFileSync(dataPath +"/"+file))
+        if(sent == false) {
+             if(req.body.gender == potentialUser.interest && req.body.interest == potentialUser.gender){
+
+        // Disliked
+        var disliked = false
+          var potentialUserValues = Object.values(potentialUser)
+            var potentialUserDislikedArray = potentialUserValues[7];
+
+        for(i = 0; potentialUserDislikedArray.length > i; i++){ // Problem her
+            if(potentialUserDislikedArray[i] == req.body.email){
+                disliked = true
+                
+            };
+        };
+
+        
+     /*   // Liked 
+        var liked = false
+            var potentialUserValues = Object.values(potentialUser)
+                var potentialUserLikeArray = potentialUserValues[7];
+
+                for(i = 0; potentialUserLikeArray.lenght > i; i++){
+                    if(potentialUserDislikedArray[i] == req.body.email){
+                        liked = true
+                    };
+                };
+
+        */
+        
+        if(disliked == false){
+            res.json(potentialUser) // Sender den det videre, som res.json (user)
+                sent = true
+
+           };
+          };
+        };
+      });
+    });
+  });   
+
+
+
+router.post("/dislike", (req, res) => {
+
+    // Får emailen af den nuværende bruger, samt emailen på det potentielle match
+    var potentialUserEmail = req.body[1]; // indekset i body-arrayet, i fetch
+    var userEmail = req.body[0].email // Indekset i body-arreyet, i fetch.
+    console.log("********************************")
+
+    // Vi finder det potentielle match, via vedkommenes email i vores 'Backend'
+    let potentialUser = JSON.parse(fs.readFileSync(dataPath +"/"+potentialUserEmail + ".json"));
+
+
+    // Vi får fat, i de gamle dislikes fra vores 'Backend' mappe.
+    var potentialUserValuesOld = Object.values(potentialUser)
+    var oldArray = potentialUserValuesOld[8]; // NR.8, er vores indeks på dislike, i vores userModel, i Models mappen
+    console.log(potentialUserValuesOld);
+
+
+    // Vi laver herefter et nyt array, med brugeren som allerede er logget ind's, email.
+    var newArray = new Array(userEmail);
+
+    // Vi laver et loop, som starter på plads 0, og som kører igennem oldArray (potentielt user match), hvis længden er større end indeks [i], incrementer vi med 1.
+    // Og derfor tilføjer gamle dislikes til nyt array.
+    for (i = 0; oldArray.length > i; i++){
+        let oldValues = oldArray[i];
+
+        newArray.push(oldValues)
+    };
+
+    // Vi sætter det potentielle matches dislike, ind i et nyt array.
+    potentialUser.dislike = newArray
+
+    fs.writeFileSync(dataPath +"/"+potentialUserEmail +".json", JSON.stringify(potentialUser, null, 2))
+});
+
+
+
 
 
 // Får informationer for brugeren
@@ -72,13 +144,13 @@ const createdUser = new User(
     req.body.password,
     req.body.gender,
     req.body.interest,
-    req.body.like,
-    req.body.dislike,
-        )
+    [],
+    []
+    );
 
 // Vi brugeren bliver oprettet, bliver den sendt til datapath(backend), som en json fil
 // Filnavnet, er emailen der bliver indtastet (req.body.email)
-fs.writeFileSync(dataPath + "/" +req.body.email + ".json", JSON.stringify(createdUser)), err =>  {
+fs.writeFileSync(dataPath + "/" +req.body.email + ".json", JSON.stringify(createdUser, null, 2)), err =>  {
     if (err) throw error;
 
 } 
