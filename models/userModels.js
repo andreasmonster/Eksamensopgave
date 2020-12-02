@@ -14,7 +14,6 @@ constructor(firstname, lastname, age, email, password, gender, interest,like,dis
     this.interest = interest;
     this.like = like;
     this.dislike = dislike;
-
     }
 }
 

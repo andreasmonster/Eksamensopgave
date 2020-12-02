@@ -159,3 +159,34 @@ function Dislike() {
     table.innerHTML = html;
 
 */
+
+
+
+
+// Like user
+
+function Like() {
+
+    // Her får vi de nuværende brugeres køn og interesser (hvad de søger)
+    let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
+    var interestUser = JSON.parse(userInterest);
+
+    // Her får vi vist, den nuværende bruger
+    let potentialUserInterest = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
+    var potentialUser = JSON.parse(potentialUserInterest);  // Vi parser herefter informationerne, vi får fra keyen
+    
+    fetch("http://localhost:3000/User/register/like/", {
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify([interestUser, potentialUser]), // Problem her
+
+    })
+
+    .catch((error) => {
+        console.error(error);
+
+  });
+
+};
