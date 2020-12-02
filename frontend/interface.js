@@ -80,6 +80,7 @@ function updateUser() {
 document.addEventListener("DOMContentLoaded", function() {
 
     let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
+
     var interestUser = JSON.parse(userInterest) // Vi parser herefter informationerne, vi får fra keyen
     console.log(userInterest.interestUser);
 
@@ -127,7 +128,7 @@ function Dislike() {
         headers: {
             'Content-type': 'application/json',
         },
-        body: JSON.stringify(interestUser, potentialUser]), // Problem her
+        body: JSON.stringify([interestUser, potentialUser]), // Problem her
 
     })
 
