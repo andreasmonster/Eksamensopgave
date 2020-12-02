@@ -60,7 +60,7 @@ function updateUser() {
 
 // Disliker funktion
 function Dislike() {
-
+    window.location.reload();
     // Her får vi de nuværende brugeres køn og interesser (hvad de søger)
     let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
         var interestUser = JSON.parse(userInterest);
@@ -111,7 +111,7 @@ function Dislike() {
 
 // Like user
 function Like() {
-
+    window.location.reload();
     // Her får vi de nuværende brugeres køn og interesser (hvad de søger)
     let userInterest = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
         var interestUser = JSON.parse(userInterest);
