@@ -128,6 +128,11 @@ function Like() {
         body: JSON.stringify([interestUser, potentialUser]), // Problem her
 
     })
+    .then(response => response.json())
+    .then(data => {
+        alertLiked()
+
+    })
 
     .catch((error) => {
         console.error(error);
@@ -135,6 +140,12 @@ function Like() {
   });
 
 };  
+
+function alertLiked(){
+// Lav en Alert funktion
+// Hvis to personer har liket hinanden, går vi ind og kigger igennem arrayet og ser dette
+// Hvis de har, alerter vi med !I har liket!
+}
 
 
 // User
@@ -148,8 +159,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let userValues = Object.values(user);
 
     var j = 0
-    for (let i of userKeys) {
-        html += "<tr><td>" + i + "</td><td>" + userValues[j] + "</td></tr>";
+    for (i = 0; i < 6; i++) {
+        html += "<tr><td>" + userKeys[i] + "</td><td>" + userValues[j] + "</td></tr>";
         j += 1
     }
 

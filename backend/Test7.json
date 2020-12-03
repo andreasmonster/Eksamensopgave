@@ -5,8 +5,7 @@
   "password": "Test7",
   "gender": "mand",
   "interest": "kvinde",
-  "like": [],
-  "dislike": [
-
-  ]
+  "like": [
+  ],
+  "dislike": []
 }

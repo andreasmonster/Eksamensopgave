@@ -3,8 +3,12 @@ const User = require("../models/userModels");
 const fs = require('fs');
 const router = express.Router();
 const err = "Error";
-
 const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvilken mappe, vi skal gemme JSON filerne til
+
+
+
+
+
 
 
 

@@ -1,24 +1,42 @@
 const express = require("express");
 const router = express.Router();
-const matchView = require("../models/matchModels");
+const fs = require("fs");
+const dataPath = "./backend";
 
+router.post("/", (req, res) => {
 
+    fs.readdir(dataPath, (err, files) => {
+        var sent = false;
+        let allMatches = []
+        for(i = 0; files.length > i; i++){
+            
+            if(sent == false) {
+         files.forEach(file => {
+            
+    
+        var userMatched = JSON.parse(fs.readFileSync(dataPath +"/"+file))
+        var userMatchedValues = Object.values(userMatched)
+        var userMatchedArray = userMatchedValues [6];
+    
+        
 
-// CRUD-endpoints
+        var liked ="";
+        
+            
+        for (i = 0; userMatchedArray.length > i; i++){
+            liked = userMatchedArray[i]
+ 
+                 if(req.body.like == userMatched.email && liked == req.body.email){
+                    allMatches.push(userMatched.firstname)
+                         }
+                     }
+                     sent = true;
+                })
+            }
+        } 
+        res.json(allMatches)
+        });
+      });  
+    
 
-// Får informationer for matchet
-router.get("/", (req, res) => {
-
-    res.json(matchView.myMatch)
-});
-
-// Sletter matchet
-router.delete("/", (req, res) =>{
-
-    matchView.myMatch = [];
-    res.json({"message": "Deleted Match"})
-
-});
-
-
-module.exports = matchView;
+module.exports = router;

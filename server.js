@@ -10,7 +10,7 @@ app.use(cors())
 
 // Require for Routes
 const userControllers = require("./controllers/userControllers.js");
-const matchControllers = require("./controllers/matchControllers.js");
+const matchView = require("./view/matchView.js");
 const userView = require("./view/userView");
 
 
@@ -22,6 +22,6 @@ console.log("Server running on port 3000")
 
 // Crud-endpoints
 app.use('/User', userControllers); // endpoint
-app.use('/Match', matchControllers); // endpoint
+app.use('/match', matchView); // endpoint
 app.use('/User/register', userView); //endpoints
 
