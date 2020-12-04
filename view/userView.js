@@ -46,6 +46,7 @@ const dataPath = "./backend"; // Kildehenvisning til Mads Holmvang // Viser hvil
     potentialUser.like = newArray
 
     fs.writeFileSync(dataPath +"/"+potentialUserEmail.email +".json", JSON.stringify(potentialUser, null, 2))
+    res.json(potentialUser)
 });
 
 
@@ -84,6 +85,30 @@ router.post("/dislike", (req, res) => {
 });
 
 
+// Match Alerts
+router.post("/matchAlert", (req,res) => {
+var interestUser = req.body[0]
+var potentialUser = req.body[1]
+
+
+var interestUserFiles = JSON.parse(fs.readFileSync(dataPath+"/"+interestUser.email+".json"))
+var matched = false
+console.log(interestUserFiles);
+var interestUserLikes = Object.values(interestUserFiles)
+//console.log(interestUserLikes[6]);
+for(i = 0; interestUserLikes.length > i; i++){
+    if (interestUserLikes[i] == potentialUser.email){
+        matched = true
+    }
+
+}    
+if(matched == true){
+    res.status(200).json(matched)
+}else {
+    res.status(200).json(matched)
+}
+
+})
 
 
 
@@ -105,10 +130,10 @@ fs.readdir(dataPath, (err, files) => {
       // Disliked
         var disliked = false
           var potentialUserValues = Object.values(potentialUser)
-            var potentialUserDislikedArray = potentialUserValues[7];
+            var potentialUserDislikedArray = potentialUserValues[7]; // Dislike i Arrayet i JSON-filen, har Index [7]
 
-        for(i = 0; potentialUserDislikedArray.length > i; i++){ 
-            if(potentialUserDislikedArray[i] == req.body.email){
+        for(i = 0; potentialUserDislikedArray.length > i; i++){  // Loop som går ind og tjekker vores JSON-filer, om der på Index [7] (Pladsen på vores Dislike-array), er en anden User som har Disliket
+            if(potentialUserDislikedArray[i] == req.body.email){// Hvis indexet [i] i Arrayet == req.body.email (Som er brugerens email, som vi bruger til at skældne imellem brugere med), får vedkommende et Dislike.
                 disliked = true
                 
             };
@@ -118,19 +143,19 @@ fs.readdir(dataPath, (err, files) => {
        // Liked 
         var liked = false
             var potentialUserValues = Object.values(potentialUser)
-                var potentialUserLikedArray = potentialUserValues[6];
+                var potentialUserLikedArray = potentialUserValues[6];// Like i Arrayet i JSON-filen, har Index [6]
 
-                for(i = 0; potentialUserLikedArray.length > i; i++){ 
-                    if(potentialUserLikedArray[i] == req.body.email){
-                        liked = true
+                for(i = 0; potentialUserLikedArray.length > i; i++){  // Loop som går ind og tjekker vores JSON-filer, om der på Index [6] (Pladsen på vores Like-array), er en anden Users som har liket
+                    if(potentialUserLikedArray[i] == req.body.email){ // Hvis indexet [i] i Arrayet == req.body.email (Som er brugerens email, som vi bruger til at skældne imellem brugere med), får vedkommende et like.
+                        liked = true // Derfor er Liked = true.
 
                 };
             };
 
         
         
-        if(disliked == false && liked == false){
-            res.json(potentialUser) // Sender den det videre, som res.json (user)
+        if(disliked == false && liked == false){ // Hvis Disliked == False (Ikke er blevet disliked) & Liked == False (Ikke blevet liket)
+            res.json(potentialUser) // Sender den det videre, som res.json, uden et Like eller Dislike.
                 sent = true
 
            }
@@ -151,7 +176,7 @@ router.get("/interface", (req, res) => {
 // Delete - Sletter Brugeren
 router.delete("/delete", (req, res) =>{
     email = req.body.email // Vi definere, at email (som er aktiv key, i Localhost), er navnet på den mail vi har oprettet
-    fs.unlink(dataPath +"/"+email + ".json", (err) => { // Vi går ind og fjerne den key som er oprettet
+    fs.unlink(dataPath +"/"+email + ".json", (err) => { // Vi går ind og fjerne den key i LocalStorage som er oprettet, som sletter brugeren.
     if (err){ throw (err)
     } else {
         console.log("Profile deleted")
@@ -199,9 +224,40 @@ const createdUser = new User(
 // Filnavnet, er emailen der bliver indtastet (req.body.email)
 fs.writeFileSync(dataPath + "/" +req.body.email + ".json", JSON.stringify(createdUser, null, 2)), err =>  {
     if (err) throw error;
+    
 
 } 
 })
+
+
+
+
+// Opdater bruger
+router.put("/update", (req, res) => {
+
+
+    const updatedUser = new User(
+        req.body.firstname,
+        req.body.lastname,
+        req.body.age,
+        req.body.email,
+        req.body.password,
+        req.body.gender,
+        req.body.interest,
+        req.body.like,
+        req.body.dislike
+        
+        );
+    
+    // brugeren bliver bliver den sendt til datapath(backend), som en json fil
+    // Filnavnet, er emailen der bliver indtastet (req.body.email) // Her går vi ind og overrider, den nuværende fil-navn
+    fs.writeFileSync(dataPath + "/" +req.body.email + ".json", JSON.stringify(updatedUser, null, 2)), err =>  {
+        if (err) throw error;
+        res.json(updatedUser)
+        
+    
+    } 
+    })
 module.exports = router;
 
 

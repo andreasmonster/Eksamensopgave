@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require("fs");
 const dataPath = "./backend";
 
+
 router.post("/", (req, res) => {
 
     fs.readdir(dataPath, (err, files) => {
@@ -33,10 +34,32 @@ router.post("/", (req, res) => {
                      sent = true;
                 })
             }
-        } 
-        res.json(allMatches)
+        } res.json(allMatches)
         });
       });  
     
 
 module.exports = router;
+
+
+/*
+
+// Delete Match
+router.delete("/delete", (req, res) =>{
+    fs.readdir(dataPath, (err, files) => {
+        var sent = false;
+        let allMatches = []
+        for(i = 0; files.length > i; i++){
+            
+            if(sent == false) {
+         files.forEach(file => {
+            
+    
+        var usersMatched = JSON.parse(fs.readFileSync(dataPath +"/"+file))
+        var userMatchedValues = Object.values(usersMatched)
+        var 
+    
+
+})
+
+*/

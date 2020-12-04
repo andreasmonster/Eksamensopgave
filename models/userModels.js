@@ -20,3 +20,5 @@ constructor(firstname, lastname, age, email, password, gender, interest,like,dis
 
 
 module.exports = User;
+
+
