@@ -1,0 +1,10 @@
+{
+  "firstname": "Test",
+  "lastname": "Test",
+  "email": "Test",
+  "password": "Test",
+  "gender": "mand",
+  "interest": "mand",
+  "like": [],
+  "dislike": []
+}

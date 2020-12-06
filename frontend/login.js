@@ -12,7 +12,7 @@ password: password.value,
 email: email.value,
 }
     
-    fetch('http://localhost:3000/User/register/login', {
+    fetch('http://localhost:3000/User/login', {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',

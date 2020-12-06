@@ -17,7 +17,7 @@ function deleteUser(){
     var email = JSON.parse(userDel) // Vi parser herefter informationerne, vi får fra key i LocalStorage (vi laver strings om til objekter)
     console.log(email.email);
 
-    fetch("http://localhost:3000/User/register/delete/",{
+    fetch("http://localhost:3000/User/delete/",{
     method: 'DELETE',
     headers: {
         'Content-type': 'application/json',
@@ -39,7 +39,7 @@ function updateUser() {
 
 
 // Vi har ingen body, eftersom at vi ikke skal have noget tilbage --> vi sletter noget
-    fetch("http://localhost:3000/User/register/update/",{
+    fetch("http://localhost:3000/User/update/",{
     method: 'PUT',
     headers: {
         'Content-type': 'application/json',
@@ -66,7 +66,7 @@ function Dislike() {
     let potentialUserInterest = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktivMatch" som er emailen på brugeren hos det potentielle Match
         var potentialUser = JSON.parse(potentialUserInterest);  // Vi parser herefter informationerne, vi får fra key i LocalStorage (vi laver strings om til objekter)
     
-    fetch("http://localhost:3000/User/register/dislike", {
+    fetch("http://localhost:3000/dislike/", {
         method: "POST",
         headers: {
             'Content-type': 'application/json',
@@ -82,28 +82,6 @@ function Dislike() {
 
 };
 
-        
-   /* }).then(response => response.json())
-    .then(data =>{
-        console.log("You disliked", data);
-
-        var userValues = Object.values(data)
-
-        let table = document.getElementById("potentialMatch")
-        let html ="";
-
-        html += "<tr><td>" + "Firstname" + "</td><td>" + userValues[0] + "</td></tr>";
-        html += "<tr><td>" + "Lastname" + "</td><td>" + userValues[1] + "</td></tr>";
-        html += "<tr><td>" + "Email" + "</td><td>" + userValues[2] + "</td></tr>";
-        html += "<tr><td>" + "Gender" + "</td><td>" + userValues[4] + "</td></tr>";
-        html += "<tr><td>" + "Interest" + "</td><td>" + userValues[5] + "</td></tr>";
-        
-
-    table.innerHTML = html;
-
-*/
-
-
 
 
 // Like user
@@ -117,7 +95,7 @@ function Like() {
     let potentialUserInterest = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktivMatch" som er emailen på brugeren hos det potentielle Match
         var potentialUser = JSON.parse(potentialUserInterest);   // Vi parser herefter informationerne, vi får fra key i LocalStorage (vi laver strings om til objekter)
     
-    fetch("http://localhost:3000/User/register/Like/", {
+    fetch("http://localhost:3000/like/", {
         method: "POST",
         headers: {
             'Content-type': 'application/json',
@@ -152,7 +130,7 @@ let potentialUserInterest = window.localStorage.getItem('aktivMatch'); // får v
 console.log(potentialUser.email);
 console.log(interestUser.like);
 
-fetch("http://localhost:3000/User/register/matchAlert", {
+fetch("http://localhost:3000/User/matchAlert", {
         method: "POST",
         headers: {
             'Content-type': 'application/json',
@@ -190,23 +168,23 @@ function userUpdate(){
 
     // Vi definerer, at updateEmail stadig er localStorage "Aktiv"
     // Derfor, når vi opdaterer brugeren, bliver JSON-filen ved med at have det samme navn.
-  var updateEmail = JSON.parse(localStorage.getItem("aktiv"))
+  var sameInformation = JSON.parse(localStorage.getItem("aktiv"))
   
 
     var userUpdate = {
-         email:     updateEmail.email, // updateEmail.email, er det fordi vi beholder det samme navn (email), som er kriteriet for JSON-filen og LocalStorage.
+         email:     sameInformation.email, // updateEmail.email, er det fordi vi beholder det samme navn (email), som er kriteriet for JSON-filen og LocalStorage.
         firstname: firstname.value,
         lastname: lastname.value,
         password: password.value,
-        gender: updateEmail.gender,
-        interest: updateEmail.interest,
-        like: updateEmail.like,
-        dislike: updateEmail.dislike
+        gender: sameInformation.gender,
+        interest: sameInformation.interest,
+        like: sameInformation.like,
+        dislike: sameInformation.dislike
         
 
     }
 
-    fetch("http://localhost:3000/User/register/update", {
+    fetch("http://localhost:3000/User/update", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json" // det som kommer nu, vil være JSON-format. // 
@@ -216,7 +194,7 @@ function userUpdate(){
         )
 
     }).then(data =>{
-        wlocalStorage.setItem('aktiv', data, JSON.stringify(userUpdate))
+        localStorage.setItem('aktiv', data, JSON.stringify(userUpdate)) // Vi opdaterer LocalStorage, med det vi har opdateret
     })
     .catch(err => {
         console.log(err) // Vi fanger en error, hvis dette forekommer
@@ -265,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var interestUser = JSON.parse(userInterest) // Vi parser herefter informationerne, vi får fra keyen
 
-    fetch("http://localhost:3000/User/register/potentialMatch/", {
+    fetch("http://localhost:3000/User/potentialMatch/", {
         method: "POST",
         headers: {
             'Content-type': 'application/json',
