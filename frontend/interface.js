@@ -13,9 +13,9 @@ function logout(){
 // Slette bruger funktion
 function deleteUser(){
 
+    
     let userDel = window.localStorage.getItem('aktiv'); // får vores LocalStorage Key "aktiv" som er emailen somm er oprettet
     var email = JSON.parse(userDel) // Vi parser herefter informationerne, vi får fra key i LocalStorage (vi laver strings om til objekter)
-    console.log(email.email);
 
     fetch("http://localhost:3000/User/delete/",{
     method: 'DELETE',
@@ -127,8 +127,7 @@ function matchedAlert(){ // Næste funktion, som skal alerte, når vi har et mat
 // Her får vi vist, den nuværende bruger
 let potentialUserInterest = window.localStorage.getItem('aktivMatch'); // får vores LocalStorage Key "aktivMatch" som er emailen på brugeren hos det potentielle Match
     var potentialUser = JSON.parse(potentialUserInterest);   // Vi parser herefter informationerne,
-console.log(potentialUser.email);
-console.log(interestUser.like);
+
 
 fetch("http://localhost:3000/User/matchAlert", {
         method: "POST",

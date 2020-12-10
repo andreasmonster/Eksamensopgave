@@ -4,7 +4,9 @@
   "email": "Test",
   "password": "Test",
   "gender": "mand",
-  "interest": "mand",
-  "like": [],
+  "interest": "kvinde",
+  "like": [
+    "Kvinde2"
+  ],
   "dislike": []
 }
